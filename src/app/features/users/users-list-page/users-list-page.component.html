@@ -1,11 +1,30 @@
-<h2>Users</h2>
-<button mat-raised-button color="primary" (click)="goToNew()">Add User</button>
+<div class="users-list-page">
+  <div class="header">
+    <h2>Users</h2>
+    <button mat-raised-button color="primary" (click)="goToNew()">Add User</button>
+  </div>
 
-@if (!facade.loading()) {
-  <app-users-list
-    [users]="facade.users()"
-    (edit)="goToEdit($event)"
-  />
-} @else {
-  <p>Loading...</p>
-}
+  @if (facade.error()) {
+    <div class="error-message">
+      {{ facade.error() }}
+      <button mat-button color="primary" (click)="loadUsers()">Retry</button>
+    </div>
+  }
+
+  @if (!facade.loading()) {
+    @if (facade.users().length === 0 && !facade.error()) {
+      <div class="no-users-message">
+        <p>No users found. Click "Add User" to create one.</p>
+      </div>
+    } @else {
+      <app-users-list
+        [users]="facade.users()"
+        (edit)="goToEdit($event)"
+      />
+    }
+  } @else {
+    <div class="loading-container">
+      <p>Loading users...</p>
+    </div>
+  }
+</div>
