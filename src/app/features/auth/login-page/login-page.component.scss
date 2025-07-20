@@ -1,20 +1,30 @@
 .login-card {
   max-width: 400px;
-  margin: 5rem auto;
+  margin: 2rem auto;
   padding: 2rem;
 }
 
-mat-form-field {
-  width: 100%;
-  margin-bottom: 1rem;
-}
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 
-button {
-  width: 100%;
-  margin-top: 1rem;
-}
+  h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
 
-p {
-  color: red;
-  margin-top: 1rem;
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    height: 36px;
+  }
+
+  .error-message {
+    color: #f44336;
+    margin-top: 1rem;
+    text-align: center;
+  }
 }
