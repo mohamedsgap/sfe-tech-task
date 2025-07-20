@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { MatButton } from '@angular/material/button';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { CommonModule } from '@angular/common';
+import { MatError } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-login-page',
@@ -18,7 +19,8 @@ import { CommonModule } from '@angular/common';
     MatCard,
     ReactiveFormsModule,
     MatButton,
-    MatProgressSpinner
+    MatProgressSpinner,
+    MatError
   ],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss'
