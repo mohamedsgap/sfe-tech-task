@@ -28,6 +28,21 @@ export class UsersFacadeService {
     });
   }
 
+  loadUser(id: number): void {
+    this.store.setLoading(true);
+    this.api.getUserById(id).subscribe({
+      next: user => {
+        this.store.setUser(user);
+        this.store.setError('');
+        this.store.setLoading(false);
+      },
+      error: err => {
+        this.store.setError('Failed to load user');
+        this.store.setLoading(false);
+      }
+    });
+  }
+
   saveUser(user: Partial<User>): void {
     const action = user.id ? this.api.editUser(user) : this.api.addUser(user);
     this.store.setLoading(true);
@@ -42,5 +57,9 @@ export class UsersFacadeService {
         this.store.setLoading(false);
       }
     });
+  }
+
+  clearUser(): void {
+    this.store.setUser(null as any);
   }
 }
