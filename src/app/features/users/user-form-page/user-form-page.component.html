@@ -1,5 +1,11 @@
 <h2>{{ user()?.id ? 'Edit' : 'Create' }} User</h2>
 
+@if (error()) {
+  <div class="error-message">
+    {{ error() }}
+  </div>
+}
+
 @if (!loading()) {
   <app-user-form
     [user]="user()"
@@ -7,5 +13,7 @@
     (cancel)="goBack()"
   />
 } @else {
-  <p>Loading...</p>
+  <div class="loading-container">
+    <p>Loading...</p>
+  </div>
 }
