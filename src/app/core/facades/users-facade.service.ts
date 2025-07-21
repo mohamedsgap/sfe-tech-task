@@ -22,7 +22,8 @@ export class UsersFacadeService {
         this.store.setLoading(false);
       },
       error: err => {
-        this.store.setError('Failed to load users');
+        const errorMessage = err.error?.message || 'Failed to load users';
+        this.store.setError(errorMessage);
         this.store.setLoading(false);
       }
     });
@@ -37,7 +38,8 @@ export class UsersFacadeService {
         this.store.setLoading(false);
       },
       error: err => {
-        this.store.setError('Failed to load user');
+        const errorMessage = err.error?.message || 'Failed to load user';
+        this.store.setError(errorMessage);
         this.store.setLoading(false);
       }
     });
@@ -46,14 +48,16 @@ export class UsersFacadeService {
   saveUser(user: Partial<User>): void {
     const action = user.id ? this.api.editUser(user) : this.api.addUser(user);
     this.store.setLoading(true);
+    this.store.setError(''); // Clear any previous errors before saving
 
     action.subscribe({
       next: (saved) => {
         this.store.upsertUser(saved);
         this.store.setLoading(false);
       },
-      error: () => {
-        this.store.setError('Failed to save user');
+      error: (err) => {
+        const errorMessage = err.error?.message || 'Failed to save user';
+        this.store.setError(errorMessage);
         this.store.setLoading(false);
       }
     });

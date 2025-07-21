@@ -26,7 +26,9 @@ export class UserFormPageComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     const userId = this.route.snapshot.paramMap.get('id');
     if (userId) {
-      this.facade.loadUser(+userId);
+      // The backend compares the ID directly with === without type conversion
+      // We need to ensure the ID is in the correct format for the backend comparison
+      this.facade.loadUser(Number(userId));
     } else {
       // Clear any existing user data when creating a new user
       this.facade.clearUser();
@@ -39,8 +41,17 @@ export class UserFormPageComponent implements OnInit, OnDestroy {
   }
 
   handleSave(user: Partial<User>) {
+    // Save the user
     this.facade.saveUser(user);
-    this.goBack();
+    
+    // We'll use a timeout to check for errors after the save operation completes
+    // This gives the facade time to process the response and update the error state
+    setTimeout(() => {
+      // Only navigate back if there's no error
+      if (!this.error()) {
+        this.goBack();
+      }
+    }, 300); // Short delay to allow the save operation to complete
   }
 
   goBack(): void {
