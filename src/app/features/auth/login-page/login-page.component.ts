@@ -1,26 +1,26 @@
 import { Component, inject, signal, WritableSignal } from '@angular/core';
-import { MatFormField, MatInput, MatLabel } from '@angular/material/input';
-import { MatCard } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth.service';
 import { Router } from '@angular/router';
-import { MatButton } from '@angular/material/button';
-import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CommonModule } from '@angular/common';
-import { MatError } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-login-page',
   imports: [
     CommonModule,
-    MatFormField,
-    MatInput,
-    MatLabel,
-    MatCard,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCardModule,
     ReactiveFormsModule,
-    MatButton,
-    MatProgressSpinner,
-    MatError
+    MatButtonModule,
+    MatProgressSpinnerModule,
+    MatIconModule
   ],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss'

@@ -1,19 +1,30 @@
-<h2>{{ user()?.id ? 'Edit' : 'Create' }} User</h2>
-
-@if (error()) {
-  <div class="error-message">
-    {{ error() }}
+<div class="form-container">
+  <div class="form-card">
+    <div class="card-header">
+      <p class="form-subtitle">{{ user()?.id ? 'Update user information' : 'Add a new user to the system' }}</p>
+      <h2 class="form-title">{{ user()?.id ? 'Edit' : 'Create' }} User</h2>
+    </div>
+    
+    <div class="card-content">
+      @if (error()) {
+        <div class="error-message">
+          <i class="material-icons">error_outline</i>
+          <span>{{ error() }}</span>
+        </div>
+      }
+      
+      @if (!loading()) {
+        <app-user-form
+          [user]="user()"
+          (save)="handleSave($event)"
+          (cancel)="goBack()"
+        />
+      } @else {
+        <div class="loading-container">
+          <div class="spinner"></div>
+          <p>Loading user data...</p>
+        </div>
+      }
+    </div>
   </div>
-}
-
-@if (!loading()) {
-  <app-user-form
-    [user]="user()"
-    (save)="handleSave($event)"
-    (cancel)="goBack()"
-  />
-} @else {
-  <div class="loading-container">
-    <p>Loading...</p>
-  </div>
-}
+</div>

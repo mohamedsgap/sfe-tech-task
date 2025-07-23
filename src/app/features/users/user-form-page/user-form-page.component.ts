@@ -4,12 +4,18 @@ import { User } from '../../../shared/models/user';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsersFacadeService } from '../../../core/facades/users-facade.service';
 import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-user-form-page',
   imports: [
     CommonModule,
-    UserFormComponent
+    UserFormComponent,
+    MatIconModule,
+    MatProgressSpinnerModule,
+    MatCardModule
   ],
   templateUrl: './user-form-page.component.html',
   styleUrl: './user-form-page.component.scss'
